@@ -4,18 +4,40 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
+    private Stage primaryStage;
+    private BorderPane rootLayout;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/nowy_fx.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        //Parent root = FXMLLoader.load(getClass().getResource("/RootLayout.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("RootLayout.fxml"));
+        //primaryStage.setTitle("Baza użytkowników");
+        //primaryStage.setScene(new Scene(root, 600, 400));
+        //primaryStage.show();
+
+        this.primaryStage=primaryStage;
+        initRootLayout();
+        showPersonLayout();
+    }
+
+    private void initRootLayout() throws IOException {
+        rootLayout = FXMLLoader.load(getClass().getClassLoader().getResource("RootLayout.fxml"));
+        Scene scene = new Scene(rootLayout);
+        primaryStage.setScene(scene);
         primaryStage.show();
+    }
 
-
+    private void showPersonLayout() throws IOException {
+        AnchorPane person = FXMLLoader.load(getClass().getClassLoader().getResource("PersonOverview.fxml"));
+        rootLayout.setCenter(person);
     }
 
     public static void main(String[] args) {
