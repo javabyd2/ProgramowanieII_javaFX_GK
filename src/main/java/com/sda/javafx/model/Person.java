@@ -2,6 +2,7 @@ package com.sda.javafx.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import java.time.LocalDate;
 
 public class Person {
 
@@ -11,6 +12,7 @@ public class Person {
     private StringProperty city;
     private StringProperty street;
     private StringProperty birthday;
+    private LocalDate date;
 
     public Person(String firstname, String lastname) {
         this.firstname = new SimpleStringProperty(firstname);
@@ -42,7 +44,9 @@ public class Person {
     }
 
     public String getPostalcode() {
-        return postalcode.get();
+        if(postalcodeProperty()!=null)
+            return postalcode.get();
+        return null;
     }
 
     public StringProperty postalcodeProperty() {
@@ -54,7 +58,9 @@ public class Person {
     }
 
     public String getCity() {
-        return city.get();
+        if(cityProperty()!=null)
+            return city.get();
+        return null;
     }
 
     public StringProperty cityProperty() {
@@ -66,7 +72,9 @@ public class Person {
     }
 
     public String getStreet() {
-        return street.get();
+        if (streetProperty()!=null)
+            return street.get();
+        return null;
     }
 
     public StringProperty streetProperty() {
@@ -78,7 +86,9 @@ public class Person {
     }
 
     public String getBirthday() {
-        return birthday.get();
+        if(birthdayProperty()!=null)
+            return birthday.get().toString();
+        return null;
     }
 
     public StringProperty birthdayProperty() {
@@ -87,5 +97,24 @@ public class Person {
 
     public void setBirthday(String birthday) {
         this.birthday.set(birthday);
+    }
+
+    public Person(String firstname, String lastname,
+                  String postalcode, String city,
+                  String street, LocalDate date) {
+        this.firstname = new SimpleStringProperty(firstname);
+        this.lastname = new SimpleStringProperty(lastname);
+        this.postalcode = new SimpleStringProperty(postalcode);
+        this.city = new SimpleStringProperty(city);
+        this.street = new SimpleStringProperty(street);
+       // this.date = new LocalDate(date);
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
